@@ -16,10 +16,12 @@ call s:checkVersion()
 
 command! -nargs=? -complete=dir GoScratchpad call s:GoScratchpad(<f-args>)
 
-function! s:GoScratchpad(rootPath)
-  if rootPath != ""
-    let l:tmpdir = rootPath
-  else
+function! s:GoScratchpad(...)
+  " TODO allow custom path
+  let l:tmpdir = ''
+
+  if l:tmpdir == ""
+    " TODO probably shouldn't depend on these directly.
     let l:tmpdir = go#util#tempdir('vim-go-scratchpad')
   endif
 
@@ -30,12 +32,12 @@ function! s:GoScratchpad(rootPath)
     execute l:cd . fnameescape(l:tmpdir)
 
     let l:make_mod_cmd = ['go', 'mod', 'init', 'vim-go-scratchpad/sheet']
-    vnew 'main.go'
-
     let [l:out, l:err] = go#util#Exec(l:make_mod_cmd)
     if l:err
-      call go#util#EchoError(printf('Error installing %s: %s', l:importPath, l:out))
+      call go#util#EchoError(printf('Error creating scratchpad module %s: %s', l:tmpdir, l:out))
     endif
+
+    exec "vnew main.go"
 
   finally
     execute l:cd . fnameescape(l:dir)
