@@ -1,6 +1,6 @@
 # vim-go-scratchpad
 
-Vim plugin to create local scratch playground like Go files for experimentation.
+Vim plugin to create temporary local scratch playground like environment to experiment with Go code.
 
 
 ## Install
