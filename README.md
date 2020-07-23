@@ -17,3 +17,7 @@ Depends on [vim-go](https://github.com/fatih/vim-go) for lazy reasons.
 
 * `:GoScratchpad` creates a temporary directory, sets up a Go module, `main.go`, opens a buffer to the `main.go` file in that directory. 
 
+
+## License
+
+The MIT License - see [`LICENSE`](LICENSE) for more details
